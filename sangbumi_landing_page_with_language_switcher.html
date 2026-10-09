@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SANGBUMI — Making realty dreams a reality</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sangbumi: {
+                            DEFAULT: '#0B3B36',
+                            dark: '#062421',
+                            light: '#135c53',
+                            accent: '#D4AF37', // Gold accent
+                            cream: '#F4F1EA'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-sangbumi-cream text-sangbumi-dark antialiased selection:bg-sangbumi-accent selection:text-sangbumi-dark">
+
+    <!-- Navbar -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-sangbumi/95 backdrop-blur-md text-white border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo Brand (Sesuai Gambar Asli) -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center border border-white/20 p-1 group-hover:border-sangbumi-accent transition-colors shadow-inner">
+                    <!-- SVG Logo Sesuai Bentuk Referensi -->
+                    <svg class="w-full h-full text-white" viewBox="0 0 100 100" fill="currentColor">
+                        <path d="M35 15C25 15 18 22 18 32C18 38 22 43 28 46C22 49 18 54 18 60C18 70 25 77 35 77C40 77 45 74 48 70C52 74 58 77 63 77C73 77 80 70 80 60C80 54 76 49 70 46C76 43 80 38 80 32C80 22 73 15 63 15C58 15 52 18 48 22C45 18 40 15 35 15Z"/>
+                    </svg>
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-widest uppercase text-white">SANGBUMI</span>
+                    <span class="block text-[9px] tracking-[0.2em] text-sangbumi-accent font-medium">ARCH & CONSTRUCTION</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#beranda" class="nav-home hover:text-sangbumi-accent transition-colors">Beranda</a>
+                <a href="#layanan" class="nav-services hover:text-sangbumi-accent transition-colors">Layanan</a>
+                <a href="#portofolio" class="nav-projects hover:text-sangbumi-accent transition-colors">Portofolio</a>
+                <a href="#tentang" class="nav-about hover:text-sangbumi-accent transition-colors">Tentang Kami</a>
+                <a href="#kontak" class="nav-contact hover:text-sangbumi-accent transition-colors">Kontak</a>
+            </nav>
+
+            <!-- Right Actions (CTA + Language Switcher) -->
+            <div class="hidden md:flex items-center gap-4">
+                <!-- Language Switcher -->
+                <div class="flex items-center bg-white/10 rounded-full p-1 border border-white/20 text-xs font-bold">
+                    <button onclick="switchLanguage('id')" id="lang-id-btn" class="px-3 py-1 rounded-full bg-sangbumi-accent text-sangbumi-dark transition-all">ID</button>
+                    <button onclick="switchLanguage('en')" id="lang-en-btn" class="px-3 py-1 rounded-full text-white hover:text-sangbumi-accent transition-all">EN</button>
+                </div>
+
+                <a href="#kontak" class="px-5 py-2.5 rounded-full bg-sangbumi-accent text-sangbumi-dark font-semibold text-sm hover:bg-white transition-all shadow-lg hover:shadow-xl">
+                    <span class="nav-cta">Konsultasi Gratis</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <div class="flex items-center gap-3 md:hidden">
+                <!-- Language Switcher Mobile -->
+                <div class="flex items-center bg-white/10 rounded-full p-1 border border-white/20 text-xs font-bold">
+                    <button onclick="switchLanguage('id')" class="px-2 py-0.5 rounded-full bg-sangbumi-accent text-sangbumi-dark">ID</button>
+                    <button onclick="switchLanguage('en')" class="px-2 py-0.5 rounded-full text-white">EN</button>
+                </div>
+                <button id="mobile-menu-btn" class="text-white focus:outline-none p-2">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-sangbumi-dark border-t border-white/10 px-6 py-6 space-y-4 shadow-2xl">
+            <a href="#beranda" class="nav-home block text-white hover:text-sangbumi-accent font-medium py-1">Beranda</a>
+            <a href="#layanan" class="nav-services block text-white hover:text-sangbumi-accent font-medium py-1">Layanan</a>
+            <a href="#portofolio" class="nav-projects block text-white hover:text-sangbumi-accent font-medium py-1">Portofolio</a>
+            <a href="#tentang" class="nav-about block text-white hover:text-sangbumi-accent font-medium py-1">Tentang Kami</a>
+            <a href="#kontak" class="nav-contact block text-white hover:text-sangbumi-accent font-medium py-1">Kontak</a>
+            <div class="pt-2">
+                <a href="#kontak" class="nav-cta block text-center w-full py-3 rounded-full bg-sangbumi-accent text-sangbumi-dark font-bold text-sm">Konsultasi Gratis</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="relative min-h-screen flex items-center justify-center pt-20 bg-sangbumi overflow-hidden text-white">
+        <!-- Background Overlay Image -->
+        <div class="absolute inset-0 z-0 opacity-25">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1920" alt="Modern Architecture" class="w-full h-full object-cover object-center">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-sangbumi via-sangbumi/70 to-transparent z-0"></div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-24">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-sangbumi-accent text-xs uppercase tracking-widest font-semibold mb-6 backdrop-blur-sm">
+                <i class="fa-solid fa-gem text-xs"></i> <span class="hero-badge">Premier Architecture & Construction</span>
+            </div>
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+                Making realty dreams <br class="hidden sm:inline"><span class="text-sangbumi-accent italic font-light">a reality.</span>
+            </h1>
+            <p class="hero-desc max-w-2xl mx-auto text-lg sm:text-xl text-gray-300 mb-10 font-light">
+                Kami mewujudkan visi arsitektur mewah dan struktur bangunan berkualitas tinggi dengan perpaduan estetika modern, fungsionalitas, serta keharmonisan alam.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#portofolio" class="hero-btn-1 w-full sm:w-auto px-8 py-4 rounded-full bg-sangbumi-accent text-sangbumi-dark font-semibold hover:bg-white transition-all shadow-xl hover:-translate-y-0.5">
+                    Lihat Portofolio Kami
+                </a>
+                <a href="#kontak" class="hero-btn-2 w-full sm:w-auto px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold transition-all backdrop-blur-sm">
+                    Jadwalkan Konsultasi
+                </a>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 pt-12 border-t border-white/10 text-left">
+                <div class="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                    <div class="text-3xl font-bold text-sangbumi-accent mb-1">150+</div>
+                    <div class="stat-1 text-xs text-gray-300 uppercase tracking-wider">Proyek Selesai</div>
+                </div>
+                <div class="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                    <div class="text-3xl font-bold text-sangbumi-accent mb-1">10+</div>
+                    <div class="stat-2 text-xs text-gray-300 uppercase tracking-wider">Tahun Pengalaman</div>
+                </div>
+                <div class="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                    <div class="text-3xl font-bold text-sangbumi-accent mb-1">45+</div>
+                    <div class="stat-3 text-xs text-gray-300 uppercase tracking-wider">Arsitek & Ahli</div>
+                </div>
+                <div class="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                    <div class="text-3xl font-bold text-sangbumi-accent mb-1">100%</div>
+                    <div class="stat-4 text-xs text-gray-300 uppercase tracking-wider">Kepuasan Klien</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="layanan" class="py-24 bg-white text-sangbumi">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="serv-subtitle text-sangbumi-light font-semibold text-sm uppercase tracking-widest block mb-2">Layanan Profesional Kami</span>
+                <h2 class="serv-title text-3xl sm:text-4xl font-bold text-sangbumi-dark">Solusi Komprehensif Arsitektur & Konstruksi</h2>
+                <div class="w-16 h-1 bg-sangbumi-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Service 1 -->
+                <div class="group bg-sangbumi-cream p-8 rounded-2xl border border-gray-200 hover:border-sangbumi-accent hover:shadow-2xl transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-xl bg-sangbumi text-sangbumi-accent flex items-center justify-center text-2xl mb-6 shadow-md group-hover:bg-sangbumi-accent group-hover:text-sangbumi-dark transition-colors">
+                            <i class="fa-solid fa-compass-drafting"></i>
+                        </div>
+                        <h3 class="serv1-title text-xl font-bold mb-3 text-sangbumi-dark">Arsitektur & Desain</h3>
+                        <p class="serv1-desc text-gray-600 text-sm leading-relaxed mb-6">
+                            Perencanaan konseptual, desain tata letak ruang inovatif, pemodelan 3D realistis, hingga gambar kerja detail.
+                        </p>
+                    </div>
+                    <a href="#kontak" class="serv-link inline-flex items-center gap-2 text-sm font-semibold text-sangbumi">
+                        Pelajari Lebih Lanjut <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="group bg-sangbumi-cream p-8 rounded-2xl border border-gray-200 hover:border-sangbumi-accent hover:shadow-2xl transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-xl bg-sangbumi text-sangbumi-accent flex items-center justify-center text-2xl mb-6 shadow-md group-hover:bg-sangbumi-accent group-hover:text-sangbumi-dark transition-colors">
+                            <i class="fa-solid fa-building"></i>
+                        </div>
+                        <h3 class="serv2-title text-xl font-bold mb-3 text-sangbumi-dark">Konstruksi Umum</h3>
+                        <p class="serv2-desc text-gray-600 text-sm leading-relaxed mb-6">
+                            Pelaksanaan pembangunan fisik gedung komersial, hunian mewah, dan fasilitas publik dengan standar struktur kokoh.
+                        </p>
+                    </div>
+                    <a href="#kontak" class="serv-link inline-flex items-center gap-2 text-sm font-semibold text-sangbumi">
+                        Pelajari Lebih Lanjut <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="group bg-sangbumi-cream p-8 rounded-2xl border border-gray-200 hover:border-sangbumi-accent hover:shadow-2xl transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-xl bg-sangbumi text-sangbumi-accent flex items-center justify-center text-2xl mb-6 shadow-md group-hover:bg-sangbumi-accent group-hover:text-sangbumi-dark transition-colors">
+                            <i class="fa-solid fa-list-check"></i>
+                        </div>
+                        <h3 class="serv3-title text-xl font-bold mb-3 text-sangbumi-dark">Manajemen Proyek</h3>
+                        <p class="serv3-desc text-gray-600 text-sm leading-relaxed mb-6">
+                            Pengawasan ketat anggaran, pengaturan jadwal terukur, kontrol kualitas mutu, dan pelaporan transparan.
+                        </p>
+                    </div>
+                    <a href="#kontak" class="serv-link inline-flex items-center gap-2 text-sm font-semibold text-sangbumi">
+                        Pelajari Lebih Lanjut <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="group bg-sangbumi-cream p-8 rounded-2xl border border-gray-200 hover:border-sangbumi-accent hover:shadow-2xl transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-xl bg-sangbumi text-sangbumi-accent flex items-center justify-center text-2xl mb-6 shadow-md group-hover:bg-sangbumi-accent group-hover:text-sangbumi-dark transition-colors">
+                            <i class="fa-solid fa-couch"></i>
+                        </div>
+                        <h3 class="serv4-title text-xl font-bold mb-3 text-sangbumi-dark">Renovasi & Interior</h3>
+                        <p class="serv4-desc text-gray-600 text-sm leading-relaxed mb-6">
+                            Pembaruan tata ruang, optimalisasi fungsi eksisting, serta desain interior eksklusif yang menyatu harmonis.
+                        </p>
+                    </div>
+                    <a href="#kontak" class="serv-link inline-flex items-center gap-2 text-sm font-semibold text-sangbumi">
+                        Pelajari Lebih Lanjut <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portofolio" class="py-24 bg-sangbumi-cream text-sangbumi-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+                <div>
+                    <span class="portfolio-subtitle text-sangbumi-light font-semibold text-sm uppercase tracking-widest block mb-2">Galeri Mahakarya</span>
+                    <h2 class="portfolio-title text-3xl sm:text-4xl font-bold text-sangbumi-dark">Portofolio Proyek Unggulan</h2>
+                    <div class="w-16 h-1 bg-sangbumi-accent mt-4 rounded-full"></div>
+                </div>
+            </div>
+
+            <!-- Portfolio Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="group relative rounded-2xl overflow-hidden shadow-lg bg-white border border-gray-200">
+                    <div class="h-72 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=800" alt="Villa" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-sangbumi-dark">The Verdant Haven Villa</h3>
+                        <p class="proj1-desc text-gray-600 text-sm mb-4">Desain arsitektur modern tropis di Bali yang menyatu sempurna dengan lanskap alam.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-100 text-xs text-gray-500 font-medium">
+                            <span><i class="fa-solid fa-location-dot text-sangbumi-accent mr-1"></i> Bali, Indonesia</span>
+                            <span class="proj-year">Selesai 2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative rounded-2xl overflow-hidden shadow-lg bg-white border border-gray-200">
+                    <div class="h-72 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800" alt="Tower" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-sangbumi-dark">Sangbumi Executive Tower</h3>
+                        <p class="proj2-desc text-gray-600 text-sm mb-4">Gedung perkantoran 24 lantai berkonsep green building dengan efisiensi energi tinggi.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-100 text-xs text-gray-500 font-medium">
+                            <span><i class="fa-solid fa-location-dot text-sangbumi-accent mr-1"></i> Jakarta Pusat</span>
+                            <span class="proj-year">Selesai 2024</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative rounded-2xl overflow-hidden shadow-lg bg-white border border-gray-200">
+                    <div class="h-72 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=800" alt="Sanctuary" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-sangbumi-dark">Aurelia Modern Sanctuary</h3>
+                        <p class="proj3-desc text-gray-600 text-sm mb-4">Rumah tinggal privat dengan kolam renang infinity dan tata cahaya interior eksklusif.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-100 text-xs text-gray-500 font-medium">
+                            <span><i class="fa-solid fa-location-dot text-sangbumi-accent mr-1"></i> Bandung, Jabar</span>
+                            <span class="proj-year">Selesai 2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Consultation Section -->
+    <section id="kontak" class="py-24 bg-white text-sangbumi">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div>
+                    <span class="contact-subtitle text-sangbumi-light font-semibold text-sm uppercase tracking-widest block mb-2">Hubungi Kami</span>
+                    <h2 class="contact-title text-3xl sm:text-4xl font-bold text-sangbumi-dark mb-6">Mulai Wujudkan Proyek Impian Anda Bersama Kami</h2>
+                    <p class="contact-desc text-gray-600 text-base leading-relaxed mb-8">
+                        Diskusikan kebutuhan arsitektur, rencana pembangunan, atau renovasi Anda dengan tim ahli kami.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-sangbumi-cream text-sangbumi flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="office-label text-xs uppercase text-gray-500 font-semibold">Kantor Pusat</h4>
+                                <p class="text-sangbumi-dark font-medium">Jl. Jend. Sudirman Kav. 52-53, Jakarta Selatan</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-sangbumi-cream text-sangbumi flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="phone-label text-xs uppercase text-gray-500 font-semibold">Telepon / WhatsApp</h4>
+                                <p class="text-sangbumi-dark font-medium">+62 811-9988-2233</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Form Box -->
+                <div class="bg-sangbumi-cream p-8 sm:p-10 rounded-3xl border border-gray-200 shadow-xl">
+                    <h3 class="form-title text-2xl font-bold text-sangbumi-dark mb-2">Formulir Konsultasi</h3>
+                    <p class="form-desc text-gray-600 text-sm mb-6">Isi data di bawah ini dan tim kami akan segera menghubungi Anda.</p>
+                    
+                    <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="name-label block text-xs font-semibold uppercase text-gray-700 mb-1">Nama Lengkap</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 focus:border-sangbumi focus:outline-none text-sangbumi-dark text-sm" placeholder="cth. Budi Santoso">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="wa-label block text-xs font-semibold uppercase text-gray-700 mb-1">Nomor WhatsApp</label>
+                                <input type="tel" required class="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 focus:border-sangbumi focus:outline-none text-sangbumi-dark text-sm" placeholder="cth. 08123456789">
+                            </div>
+                            <div>
+                                <label class="service-label block text-xs font-semibold uppercase text-gray-700 mb-1">Layanan Diminati</label>
+                                <select class="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 focus:border-sangbumi focus:outline-none text-sangbumi-dark text-sm">
+                                    <option class="opt-1">Arsitektur & Desain</option>
+                                    <option class="opt-2">Konstruksi Umum</option>
+                                    <option class="opt-3">Manajemen Proyek</option>
+                                    <option class="opt-4">Renovasi & Interior</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="msg-label block text-xs font-semibold uppercase text-gray-700 mb-1">Pesan / Detail Proyek</label>
+                            <textarea rows="4" required class="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 focus:border-sangbumi focus:outline-none text-sangbumi-dark text-sm" placeholder="Ceritakan rencana lokasi atau konsep..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn w-full py-4 rounded-xl bg-sangbumi hover:bg-sangbumi-dark text-white font-bold text-sm transition-all shadow-lg">
+                            Kirim Permintaan Konsultasi
+                        </button>
+                    </form>
+
+                    <div id="form-success" class="hidden mt-4 p-4 rounded-xl bg-green-100 border border-green-300 text-green-800 text-sm text-center">
+                        <i class="fa-solid fa-circle-check text-green-600 mr-2"></i> <span class="success-msg">Terima kasih! Pesan Anda telah terkirim.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-sangbumi-dark text-white pt-16 pb-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center border border-white/20 p-1">
+                            <svg class="w-full h-full text-white" viewBox="0 0 100 100" fill="currentColor">
+                                <path d="M35 15C25 15 18 22 18 32C18 38 22 43 28 46C22 49 18 54 18 60C18 70 25 77 35 77C40 77 45 74 48 70C52 74 58 77 63 77C73 77 80 70 80 60C80 54 76 49 70 46C76 43 80 38 80 32C80 22 73 15 63 15C58 15 52 18 48 22C45 18 40 15 35 15Z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-xl font-bold tracking-wider uppercase text-white">SANGBUMI</span>
+                            <span class="block text-[10px] tracking-widest text-sangbumi-accent">Making realty dreams a reality</span>
+                        </div>
+                    </div>
+                    <p class="footer-desc text-gray-400 text-sm max-w-sm mb-6">
+                        Perusahaan arsitektur dan konstruksi terdepan yang mendedikasikan karya terbaik untuk setiap hunian dan bangunan komersial Anda.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="nav-title text-sm font-bold uppercase tracking-wider text-sangbumi-accent mb-4">Navigasi Utama</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#beranda" class="nav-home hover:text-white transition-colors">Beranda</a></li>
+                        <li><a href="#layanan" class="nav-services hover:text-white transition-colors">Layanan Kami</a></li>
+                        <li><a href="#portofolio" class="nav-projects hover:text-white transition-colors">Portofolio Proyek</a></li>
+                        <li><a href="#tentang" class="nav-about hover:text-white transition-colors">Tentang Kami</a></li>
+                        <li><a href="#kontak" class="nav-contact hover:text-white transition-colors">Hubungi Kami</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="spec-title text-sm font-bold uppercase tracking-wider text-sangbumi-accent mb-4">Layanan Spesialis</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><span class="spec-1 hover:text-white transition-colors cursor-pointer">Arsitektur Modern Tropis</span></li>
+                        <li><span class="spec-2 hover:text-white transition-colors cursor-pointer">Konstruksi Gedung Bertingkat</span></li>
+                        <li><span class="spec-3 hover:text-white transition-colors cursor-pointer">Manajemen Konstruksi Sipil</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+                <p class="copyright">&copy; 2026 PT SANGBUMI Konstruksi Arsitektur. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript & Language Translation Dictionary -->
+    <script>
+        const translations = {
+            id: {
+                "nav-home": "Beranda",
+                "nav-services": "Layanan",
+                "nav-projects": "Portofolio",
+                "nav-about": "Tentang Kami",
+                "nav-contact": "Kontak",
+                "nav-cta": "Konsultasi Gratis",
+                "hero-badge": "Premier Architecture & Construction",
+                "hero-desc": "Kami mewujudkan visi arsitektur mewah dan struktur bangunan berkualitas tinggi dengan perpaduan estetika modern, fungsionalitas, serta keharmonisan alam.",
+                "hero-btn-1": "Lihat Portofolio Kami",
+                "hero-btn-2": "Jadwalkan Konsultasi",
+                "stat-1": "Proyek Selesai",
+                "stat-2": "Tahun Pengalaman",
+                "stat-3": "Arsitek & Ahli",
+                "stat-4": "Kepuasan Klien",
+                "serv-subtitle": "Layanan Profesional Kami",
+                "serv-title": "Solusi Komprehensif Arsitektur & Konstruksi",
+                "serv1-title": "Arsitektur & Desain",
+                "serv1-desc": "Perencanaan konseptual, desain tata letak ruang inovatif, pemodelan 3D realistis, hingga gambar kerja detail.",
+                "serv2-title": "Konstruksi Umum",
+                "serv2-desc": "Pelaksanaan pembangunan fisik gedung komersial, hunian mewah, dan fasilitas publik dengan standar struktur kokoh.",
+                "serv3-title": "Manajemen Proyek",
+                "serv3-desc": "Pengawasan ketat anggaran, pengaturan jadwal terukur, kontrol kualitas mutu, dan pelaporan transparan.",
+                "serv4-title": "Renovasi & Interior",
+                "serv4-desc": "Pembaruan tata ruang, optimalisasi fungsi eksisting, serta desain interior eksklusif yang menyatu harmonis.",
+                "serv-link": "Pelajari Lebih Lanjut",
+                "portfolio-subtitle": "Galeri Mahakarya",
+                "portfolio-title": "Portofolio Proyek Unggulan",
+                "proj1-desc": "Desain arsitektur modern tropis di Bali yang menyatu sempurna dengan lanskap alam.",
+                "proj2-desc": "Gedung perkantoran 24 lantai berkonsep green building dengan efisiensi energi tinggi.",
+                "proj3-desc": "Rumah tinggal privat dengan kolam renang infinity dan tata cahaya interior eksklusif.",
+                "proj-year": "Selesai 2025",
+                "contact-subtitle": "Hubungi Kami",
+                "contact-title": "Mulai Wujudkan Proyek Impian Anda Bersama Kami",
+                "contact-desc": "Diskusikan kebutuhan arsitektur, rencana pembangunan, atau renovasi Anda dengan tim ahli kami.",
+                "office-label": "Kantor Pusat",
+                "phone-label": "Telepon / WhatsApp",
+                "form-title": "Formulir Konsultasi",
+                "form-desc": "Isi data di bawah ini dan tim kami akan segera menghubungi Anda.",
+                "name-label": "Nama Lengkap",
+                "wa-label": "Nomor WhatsApp",
+                "service-label": "Layanan Diminati",
+                "opt-1": "Arsitektur & Desain",
+                "opt-2": "Konstruksi Umum",
+                "opt-3": "Manajemen Proyek",
+                "opt-4": "Renovasi & Interior",
+                "msg-label": "Pesan / Detail Proyek",
+                "submit-btn": "Kirim Permintaan Konsultasi",
+                "success-msg": "Terima kasih! Pesan Anda telah terkirim. Tim SANGBUMI akan segera menghubungi Anda.",
+                "footer-desc": "Perusahaan arsitektur dan konstruksi terdepan yang mendedikasikan karya terbaik untuk setiap hunian dan bangunan komersial Anda.",
+                "nav-title": "Navigasi Utama",
+                "spec-title": "Layanan Spesialis",
+                "spec-1": "Arsitektur Modern Tropis",
+                "spec-2": "Konstruksi Gedung Bertingkat",
+                "spec-3": "Manajemen Konstruksi Sipil",
+                "copyright": "© 2026 PT SANGBUMI Konstruksi Arsitektur. All rights reserved."
+            },
+            en: {
+                "nav-home": "Home",
+                "nav-services": "Services",
+                "nav-projects": "Portfolio",
+                "nav-about": "About Us",
+                "nav-contact": "Contact",
+                "nav-cta": "Free Consultation",
+                "hero-badge": "Premier Architecture & Construction",
+                "hero-desc": "We bring luxury architectural visions and high-quality structures to life through a blend of modern aesthetics, functionality, and harmony with nature.",
+                "hero-btn-1": "View Our Portfolio",
+                "hero-btn-2": "Schedule Consultation",
+                "stat-1": "Completed Projects",
+                "stat-2": "Years of Experience",
+                "stat-3": "Architects & Experts",
+                "stat-4": "Client Satisfaction",
+                "serv-subtitle": "Our Professional Services",
+                "serv-title": "Comprehensive Architecture & Construction Solutions",
+                "serv1-title": "Architecture & Design",
+                "serv1-desc": "Conceptual planning, innovative spatial layouts, realistic 3D modeling, and detailed working drawings.",
+                "serv2-title": "General Construction",
+                "serv2-desc": "Physical execution of commercial buildings, luxury residences, and public facilities with robust structural standards.",
+                "serv3-title": "Project Management",
+                "serv3-desc": "Strict budget supervision, measurable scheduling, quality control, and transparent reporting.",
+                "serv4-title": "Renovation & Interior",
+                "serv4-desc": "Spatial updates, existing function optimization, and exclusive interior designs that blend harmoniously.",
+                "serv-link": "Learn More",
+                "portfolio-subtitle": "Masterpiece Gallery",
+                "portfolio-title": "Featured Project Portfolio",
+                "proj1-desc": "Modern tropical architectural design in Bali seamlessly integrated with the natural landscape.",
+                "proj2-desc": "A 24-floor office building featuring a green building concept with high energy efficiency.",
+                "proj3-desc": "Private residence featuring an infinity pool and exclusive interior lighting design.",
+                "proj-year": "Completed 2025",
+                "contact-subtitle": "Contact Us",
+                "contact-title": "Start Realizing Your Dream Project With Us",
+                "contact-desc": "Discuss your architectural needs, construction plans, or renovations with our expert team.",
+                "office-label": "Headquarters",
+                "phone-label": "Phone / WhatsApp",
+                "form-title": "Consultation Form",
+                "form-desc": "Fill out the data below and our team will contact you shortly.",
+                "name-label": "Full Name",
+                "wa-label": "WhatsApp Number",
+                "service-label": "Interested Service",
+                "opt-1": "Architecture & Design",
+                "opt-2": "General Construction",
+                "opt-3": "Project Management",
+                "opt-4": "Renovasi & Interior",
+                "msg-label": "Message / Project Details",
+                "submit-btn": "Send Consultation Request",
+                "success-msg": "Thank you! Your message has been sent. The SANGBUMI team will contact you soon.",
+                "footer-desc": "A leading architecture and construction company dedicated to delivering the finest craftsmanship for your residences and commercial buildings.",
+                "nav-title": "Main Navigation",
+                "spec-title": "Specialist Services",
+                "spec-1": "Modern Tropical Architecture",
+                "spec-2": "High-Rise Building Construction",
+                "spec-3": "Civil Construction Management",
+                "copyright": "© 2026 PT SANGBUMI Architecture & Construction. All rights reserved."
+            }
+        };
+
+        function switchLanguage(lang) {
+            // Update buttons state
+            const idBtn = document.getElementById('lang-id-btn');
+            const enBtn = document.getElementById('lang-en-btn');
+            if (lang === 'en') {
+                if(idBtn) { idBtn.className = "px-3 py-1 rounded-full text-white hover:text-sangbumi-accent transition-all"; }
+                if(enBtn) { enBtn.className = "px-3 py-1 rounded-full bg-sangbumi-accent text-sangbumi-dark transition-all"; }
+            } else {
+                if(idBtn) { idBtn.className = "px-3 py-1 rounded-full bg-sangbumi-accent text-sangbumi-dark transition-all"; }
+                if(enBtn) { enBtn.className = "px-3 py-1 rounded-full text-white hover:text-sangbumi-accent transition-all"; }
+            }
+
+            // Translate elements
+            for (const key in translations[lang]) {
+                const elements = document.querySelectorAll('.' + key);
+                elements.forEach(el => {
+                    el.textContent = translations[lang][key];
+                });
+            }
+        }
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if(mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const successBox = document.getElementById('form-success');
+            successBox.classList.remove('hidden');
+            event.target.reset();
+            setTimeout(() => {
+                successBox.classList.add('hidden');
+            }, 6000);
+        }
+    </script>
+</body>
+</html>
